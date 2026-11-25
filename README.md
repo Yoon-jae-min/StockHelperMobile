@@ -1,97 +1,58 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 주식 헬퍼 (모바일 앱)
 
-# Getting Started
+주식 시세, 뉴스, 재무 지표, 가격 차트를 보고 **매수·매도 판단**을 돕는 **Android / iOS** 앱입니다.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 기능
 
-## Step 1: Start Metro
+- **대시보드**: 주요 종목 실시간 시세, 등락률, 시장 뉴스
+- **종목 상세** (종목 탭 시): 현재가·등락, 가격 추이 차트, 애널리스트 추천, 재무 지표, 해당 기업 뉴스
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 기술 스택
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- **React Native** (Android / iOS)
+- **React Navigation** (네이티브 스택)
+- **react-native-gifted-charts** (가격 차트)
+- **Finnhub API** (시세, 뉴스, 재무, 추천)
 
-```sh
-# Using npm
-npm start
+## 실행 방법
 
-# OR using Yarn
-yarn start
-```
+1. **의존성 설치**
+   ```bash
+   cd StockHelperMobile
+   npm install
+   ```
 
-## Step 2: Build and run your app
+2. **API 키 설정**  
+   프로젝트 루트에 `.env` 파일을 만들고 다음을 넣습니다.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+   - **Finnhub** (필수): [finnhub.io](https://finnhub.io/register) 회원가입 후 발급
+   - **Naver** (한국어 뉴스용, 선택): [developers.naver.com](https://developers.naver.com/appinfo)에서 애플리케이션 등록 후 Client ID, Secret 발급
 
-### Android
+   ```
+   FINNHUB_API_KEY=발급받은_키
+   NAVER_CLIENT_ID=발급받은_Client_ID
+   NAVER_CLIENT_SECRET=발급받은_Client_Secret
+   ```
+   (`.env`는 Git에 올라가지 않습니다. Naver 키가 없어도 앱은 동작하며, 한국어 뉴스만 표시되지 않습니다.)
+   **키를 바꾼 뒤에는 앱을 다시 빌드해야 합니다.** (`npm run android` 또는 `npm run ios` 재실행)
 
-```sh
-# Using npm
-npm run android
+3. **Android 실행** (에뮬레이터 또는 실제 기기 연결 후)
+   ```bash
+   npm run android
+   ```
 
-# OR using Yarn
-yarn android
-```
+4. **iOS 실행** (Mac + Xcode 필요)
+   ```bash
+   cd ios && pod install && cd ..
+   npm run ios
+   ```
 
-### iOS
+5. **Metro 번들러** (별도 터미널에서)
+   ```bash
+   npm start
+   ```
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 주의사항
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Finnhub 무료 플랜은 요청 제한이 있으므로 과도한 새로고침은 피하세요.
+- 추천·재무·뉴스는 **참고용**이며, 매수·매도 결정은 본인 판단과 책임입니다.
